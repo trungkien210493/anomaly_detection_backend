@@ -52,7 +52,7 @@ class HoltWinter(BaseAlgorithm):
         df['upper'] = model.fittedvalues + upper
         df['lower'] = model.fittedvalues + lower
         df.index = df.index.view(np.int64)//10**6
-        anomaly = df[(df['data'] < df['lower']) & (df['data'] > df['upper'])]['data']
+        anomaly = df[(df['data'] < df['lower']) | (df['data'] > df['upper'])]['data']
         return_value = {}
         if len(anomaly) == 0:
             return_value['anomaly'] = {}

@@ -40,7 +40,7 @@ class TSDecomposition(BaseAlgorithm):
         df['lower'] = ds_result.trend + ds_result.seasonal + lower
         df.dropna(inplace=True)
         df.index = df.index.view(np.int64)//10**6
-        anomaly = df[(df['data'] < df['lower']) & (df['data'] > df['upper'])]['data']
+        anomaly = df[(df['data'] < df['lower']) | (df['data'] > df['upper'])]['data']
         return_value = {}
         if len(anomaly) == 0:
             return_value['anomaly'] = {}
